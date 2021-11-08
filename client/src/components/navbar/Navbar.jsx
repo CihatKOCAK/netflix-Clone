@@ -6,7 +6,7 @@ import { ArrowDropDown, NotificationsNone } from '@mui/icons-material';
 import { NavLink } from 'react-router-dom';
 
 
-const Navbar = () => {
+const Navbar = ({Logout}) => {
     const [isScrolled, setIsScrolled] = useState(false);
     window.onscroll = () => {
         setIsScrolled(window.pageYOffset === 0 ? false : true);
@@ -34,7 +34,7 @@ const Navbar = () => {
                         <ArrowDropDown className="icon" />
                         <div className="options">
                             <span>Settings</span>
-                            <span> <NavLink to="/" className="tags">  Logout </NavLink> </span>
+                            <span> <a onClick = {Logout}> Logout </a></span>
                         </div>
                     </div>
 

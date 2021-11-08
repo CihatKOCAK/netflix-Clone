@@ -5,7 +5,7 @@ import "./home.scss";
 import Tmdb from '../../Tmdb';
 import { useState, useEffect } from "react";
 
-function Home() {
+function Home({Logout}) {
 
   
   const [movieList, setMovieList] = useState([]);
@@ -33,7 +33,7 @@ function Home() {
 
   return (
     <div className="home">
-      <Navbar />
+      <Navbar Logout = {Logout} />
       {featuredData &&
         <Featured item={featuredData} />
       }

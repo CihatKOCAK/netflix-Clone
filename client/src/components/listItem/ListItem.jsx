@@ -1,6 +1,7 @@
 import "./listItem.scss";
 import { Add, PlayArrow, ThumbDown, ThumbUp } from "@mui/icons-material"
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 export default function ListItem({ index, item }) {
   const [isHovered, setIsHovered] = useState(false);
   //console.log(item);
@@ -15,7 +16,10 @@ export default function ListItem({ index, item }) {
   else if (item.release_date) {
     date = item.release_date.substring(0, 4);
   }
-
+  let history = useHistory();
+  function handleOnClick() {
+    history.push('/watch');
+  }
 
   return (
     <div
@@ -37,7 +41,7 @@ export default function ListItem({ index, item }) {
           <div className="itemInfo" key={item.id.toString()}  >
             <h3>{item.title}{item.name}</h3>
             <div className="icons">
-              <PlayArrow className="icon" />
+              <PlayArrow onClick={handleOnClick} className="icon" />
               <Add className="icon" />
               <ThumbUp className="icon" />
               <ThumbDown className="icon" />

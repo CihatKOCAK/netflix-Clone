@@ -12,7 +12,7 @@ app.use(
     extended: true,
   })
 );
-
+/*
 app.get("/", (request, response) => {
   db.any('SELECT * from users')
   .then(function (data) {
@@ -23,6 +23,17 @@ app.get("/", (request, response) => {
   })
   
 });
+*/
+
+app.get("/", (request, response) => {
+  db.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+});
+
 
 app.post("/users", (request, response) => {
   const { mail, password } = request.body;
