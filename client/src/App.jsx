@@ -2,64 +2,54 @@ import "./app.scss"
 import Home from "./pages/home/Home"
 import Watch from "./pages/watch/Watch";
 import LoginP from "./pages/login/LoginP";
-import Register from "./pages/register/Register";
+import RegisterP from "./pages/register/RegisterP";
 import NoMatch from "./pages/notfound/Notfound";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useState } from "react";
-import { Redirect } from 'react-router';
+import axios from 'axios';
 
 const App = () => {
-  const userData = {
-
-    email: "user@user.com",
-    name: "Cihat KOÇAK",
-    password: "123"
-
-    /*
-    "user": {
-      "0": {
-        email: "user@user.com",
-        name: "Cihat KOÇAK",
-        password: "123"
-      },
-      "1": {
-        email: "user2@user.com",
-        name: "Eren Şahin",
-        password: "123"
-      }
-    }
-    */
-  }
-
-
-
-  const [user, setUser] = useState({ email: "asd", name: "" });
+  const [user, setUser] = useState({ email: "", name: "" });
   const [error, setError] = useState("");
+  const url = "http://localhost:3002/users/";
 
-  const Login = details => {
-    console.log(details);
-    if (details.email === userData.email && details.password === userData.password) {
+  const Login = async detailsLogin => {
+
+    await axios.post(
+      url + detailsLogin.email
+    ).then(function (response) {
+      console.log("data", response);
+
+    if (detailsLogin.email === response.data.email && detailsLogin.password === response.data.password) {
       console.log("Logged in!");
+
       setUser({
         //add name 
-        email: details.email
+        email: detailsLogin.email
       })
 
     }
     else {
       console.log("Details do not match")
-      setError("Details do not match!")
+      setError("Details do not match!" )
     }
-  }
+    })
+      .catch(function (response) {
+        //handle error
+        console.log("Details do not match", response)
+      setError("Details do not match!")
+      });
+
+  };
+
   const Logout = () => {
     setUser({
       email: "",
       name: ""
-    })
+    });
+    setError("")
     console.log("Logout");
-  }
-
-
+  };
 
   return (
     <div>
@@ -74,7 +64,7 @@ const App = () => {
             )}
           </Route>
           <Route path="/register">
-            <Register />
+            <RegisterP/>
           </Route>
           <Route path="/watch">
             <Watch />
@@ -85,11 +75,6 @@ const App = () => {
         </Switch>
       </Router>
     </div>
-
-
-
-
-
   );
 };
 

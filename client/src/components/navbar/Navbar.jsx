@@ -3,7 +3,6 @@ import "./navbar.scss"
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import { ArrowDropDown, NotificationsNone } from '@mui/icons-material';
-import { NavLink } from 'react-router-dom';
 
 
 const Navbar = ({Logout}) => {
@@ -33,8 +32,8 @@ const Navbar = ({Logout}) => {
                     <div className="profile">
                         <ArrowDropDown className="icon" />
                         <div className="options">
-                            <span>Settings</span>
-                            <span> <a onClick = {Logout}> Logout </a></span>
+                            <span key={"settings"}>Settings</span>
+                            <span key={"logout"}> <a onClick = {Logout}> Logout </a></span>
                         </div>
                     </div>
 

@@ -1,45 +1,16 @@
-import { useState, useEffect, useContext, useCallback } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./login.scss";
-import axios from 'axios';
 
 export default function Login({ Login, error }) {
   const [details, setDetails] = useState({ email: "", password: "" });
 
   const submitHandler = e => {
     e.preventDefault();
+    setDetails(details)
+    console.log(setDetails);
     Login(details);
   }
-
-  let history = useHistory();
-
-
-  function handleOnClick() {
-    history.push('/home');
-  }
-
-  /*
-    const submitHandler = e => {
-      
-      
-      e.preventDefault();
-   
-      if (details.email.length > 0 && details.password.length > 0) {
-        axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.post('http://localhost:3001/users/', { mail: 'deneme2@gmail.com', name: 'deneme', password: '123' })
-          .then((response) => {
-            console.log("Logged in", response.data.name);
-          })
-          .catch((error) => {
-            console.log('error', error);
-          })
-        console.log("asd")
-   
-      }
-      console.log(axios.post('http://localhost:3001/users', { mail: 'deneme2@gmail.com', name: 'deneme', password: '123' }));
-   
-  */
-
 
 
   return (
@@ -56,7 +27,7 @@ export default function Login({ Login, error }) {
       <div className="container">
         <form onSubmit={submitHandler}>
           <h1>Sign In</h1>
-          {/* ERROR */ (error != "") ? ( <div className = "error"> {error} </div>): ""}
+          {/* ERROR */ (error !== "") ? ( <div className = "error"> {error} </div>): ""}
           <input type="email" placeholder="Email or phone number" onChange={e => setDetails({ ...details, email: e.target.value })} value={details.email} />
           <input type="password" placeholder="Password" onChange={e => setDetails({ ...details, password: e.target.value })} value={details.password} />
           <button type="submit"  className="loginButton">Sign In</button>

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +17,8 @@
     "pg-hstore": "^2.3.4",
     "pg-promise": "^10.11.1",
     "sequelize": "^6.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }

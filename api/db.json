@@ -1,0 +1,20 @@
+[
+    {
+        "id":0,
+        "email": "user@user.com",
+        "name": "Cihat KOÇAK",
+        "password": "123"
+    },
+    {
+        "id":1,
+        "email": "deneme@deneme.com",
+        "name": "Burak KOÇAK",
+        "password": "123"
+    },
+    {
+        "id":2,
+        "email": "deneme2@deneme.com",
+        "name": "asd",
+        "password": "123"
+    }
+]
