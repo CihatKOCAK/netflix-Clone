@@ -9,7 +9,7 @@ import { useState } from "react";
 import axios from 'axios';
 
 const App = () => {
-  const [user, setUser] = useState({ email: "", name: "" });
+  const [logined, setLogined] = useState(false);
   const [error, setError] = useState("");
   const url = "http://localhost:3002/users/";
 
@@ -23,10 +23,7 @@ const App = () => {
     if (detailsLogin.email === response.data.email && detailsLogin.password === response.data.password) {
       console.log("Logged in!");
 
-      setUser({
-        //add name 
-        email: detailsLogin.email
-      })
+      setLogined(true);
 
     }
     else {
@@ -43,10 +40,7 @@ const App = () => {
   };
 
   const Logout = () => {
-    setUser({
-      email: "",
-      name: ""
-    });
+    setLogined(false)
     setError("")
     console.log("Logout");
   };
@@ -57,7 +51,7 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path="/">
-            {(user.email === "") ? (
+            {(logined === false) ? (
               <LoginP Login={Login} error={error} />
             ) : (
               <Home Logout={Logout} />
