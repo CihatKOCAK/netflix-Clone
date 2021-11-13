@@ -1,8 +1,16 @@
 const app = require("express")();
 const db = require("./db.json");
 var express = require("express");
+var cors = require('cors')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
+app.use((req, res, next)=>{
+  app.options('*', cors())
+  next();
+ }
+);
 
 app.get("/users", (req, res) => {
   console.log("Request...");
@@ -20,6 +28,7 @@ app.get("/users/:email", (req, res) => {
 });
 
 app.post("/users/:email", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   const user = db.find((u) => u.email == req.params.email);
   if (user) {
     res.status(200).send(user);
@@ -30,17 +39,16 @@ app.post("/users/:email", (req, res) => {
   }
 });
 
-app.post("/register", (req, res) => {
+app.post("/register",cors(), (req, res) => {
   const willSaveData = {
     id: new Date().getTime(),
     email: req.body.email,
     name: req.body.name,
-    password: req.body.password,
+    password: req.body.password, 
   };
-  console.log(req);
   db.push(willSaveData);
   console.log(willSaveData, "from DB");
-   res.send(willSaveData);
+  res.status(200).send(willSaveData);
 });
 
 app.listen(process.env.PORT || 3002, () => {

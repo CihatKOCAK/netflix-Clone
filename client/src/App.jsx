@@ -16,15 +16,12 @@ const App = () => {
   const Login = async detailsLogin => {
 
     await axios.post(
-      url + detailsLogin.email
-    ).then(function (response) {
+      url + detailsLogin.email).then(function (response) {
       console.log("data", response);
 
     if (detailsLogin.email === response.data.email && detailsLogin.password === response.data.password) {
       console.log("Logged in!");
-
       setLogined(true);
-
     }
     else {
       console.log("Details do not match")
